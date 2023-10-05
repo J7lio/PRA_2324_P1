@@ -26,30 +26,78 @@ class ListArray : public List<T>{
 		}
 
 	public:
-			ListArray(){
-				arr = new T[MINSIZE];
-				max = MINSIZE;
-				n = 0;
+		void insert(int pos, T e){
+			if(pos < 0 || pos >= n) throw std::out_of_range("Posicion fuera de rango");
+
+			for(int i = n-1; i != pos; i--){
+				arr[i] = arr[i-1];
+			}
+			arr[pos] = e;
+			n++;
+		}
+
+		void append(T e){
+			insert(n, e);
+		}
+
+		void prepend(T e){
+			insert(0, e);
+		}
+
+		T remove(int pos){
+			if(pos < 0 || pos >= n) throw std::out_of_range("Posicion fuera de rango");
+
+			T temp = arr[pos];
+
+			for(int i = pos; i < n-1; i++){
+				arr[pos] = arr[pos+1];
+			}
+			return temp;
+		}
+
+		T get(int pos){
+			if(pos < 0 || pos >= n) throw std::out_of_range("Posicion fuera de rango");
+			return arr[pos];
+		}
+
+		int search(T e){
+			for(int i = 0; i < n; i++){
+				if(arr[i] == e) return i;
+			}
+			return -1;
+		}
+
+		bool empty(){
+			return n==0;
+		}
+
+		int size(){
+			return n;
+		}
+
+		ListArray(){
+			arr = new T[MINSIZE];
+			max = MINSIZE;
+			n = 0;
+		}
+
+		~ListArray(){
+			delete[] arr;
+		}
+
+		T operator[](int pos){
+			return get(pos);
+		}
+
+		friend std::ostream& operator<<(std::ostream &out, const ListArray<T> &list){
+			out << "Array [";
+			for(int i = 0; i < list.n; i++){
+				out << list.arr[i] << ", ";
+				//Falta arreglar la coma alfinal del array
 			}
 
-			~ListArray(){
-				delete[] arr;
-			}
-
-			T operator[](int pos){
-				if(pos < 0 || pos >= max) throw std::out_of_range("Posicion fuera de rango");
-				return arr[pos];
-			}
-
-			friend std::ostream& operator<<(std::ostream &out, const ListArray<T> &list){
-				out << "Array [";
-				for(int i = 0; i < list.n; i++){
-					out << list.arr[i] << ", ";
-					//Falta arreglar la coma alfinal del array
-				}
-
-				out << "]";
-				return out;
-			}
+			out << "]";
+			return out;
+		}
 
 };
