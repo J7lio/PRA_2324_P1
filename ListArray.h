@@ -17,7 +17,7 @@ class ListArray : public List<T>{
 			T* new_arr = new T[new_size];
 
 			for(int i = 0; i < std::min(max, new_size); i++){
-				new_arr[i] == arr[i];
+				new_arr[i] = arr[i];
 			}
 
 			delete[] arr;
@@ -27,14 +27,23 @@ class ListArray : public List<T>{
 
 	public:
 		void insert(int pos, T e){
-			if(pos < 0 || pos >= n) throw std::out_of_range("Posicion fuera de rango");
+			if(pos < 0 || pos > n) throw std::out_of_range("Posicion fuera de rango");
 
-			for(int i = n-1; i != pos; i--){
-				arr[i] = arr[i-1];
+			if(n >= max) resize(max*2);
+
+			if(n == 0){
+                arr[0] = e;
+			}else if(pos == n){
+			    arr[pos] = e;
+			}else{
+                for(int i=n; i>=pos; i--){
+					arr[i] = arr[i-1];
+				}
 			}
 			arr[pos] = e;
 			n++;
 		}
+
 
 		void append(T e){
 			insert(n, e);
@@ -52,6 +61,7 @@ class ListArray : public List<T>{
 			for(int i = pos; i < n-1; i++){
 				arr[pos] = arr[pos+1];
 			}
+			n--;
 			return temp;
 		}
 
@@ -92,12 +102,15 @@ class ListArray : public List<T>{
 		friend std::ostream& operator<<(std::ostream &out, const ListArray<T> &list){
 			out << "Array [";
 			for(int i = 0; i < list.n; i++){
-				out << list.arr[i] << ", ";
+				out << "\n" << list.arr[i];
 				//Falta arreglar la coma alfinal del array
 			}
+
+			if(list.n>0) out << "\n";
 
 			out << "]";
 			return out;
 		}
 
 };
+
