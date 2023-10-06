@@ -32,11 +32,11 @@ class ListArray : public List<T>{
 			if(n >= max) resize(max*2);
 
 			if(n == 0){
-                arr[0] = e;
+				arr[0] = e;
 			}else if(pos == n){
-			    arr[pos] = e;
+				arr[pos] = e;
 			}else{
-                for(int i=n; i>=pos; i--){
+				for(int i=n; i>=pos; i--){
 					arr[i] = arr[i-1];
 				}
 			}
