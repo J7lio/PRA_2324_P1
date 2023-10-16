@@ -10,5 +10,8 @@ bin/testListLinked: testListLinked.cpp ListLinked.h List.h Node.h
 	mkdir -p bin
 	g++ -o bin/testListLinked testListLinked.cpp ListLinked.h List.h Node.h
 
+Point2d.o: Point2D.h Point2D.cpp
+	g++ -c Point2D.cpp
+
 clean:
 	rm -r *.o *.gch bin
