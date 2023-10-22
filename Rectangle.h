@@ -27,7 +27,6 @@ class Rectangle : public Shape{
 		Rectangle& operator=(const Rectangle &r);
 		friend std::ostream& operator<<(std::ostream &out, const Rectangle &r);
 
-		//quitar el = 0 arregla algo ns pq
 		virtual void set_vertices(Point2D* vertices);
 
 		//Funciones heredadas
