@@ -44,3 +44,8 @@ std::ostream& operator<<(std::ostream& out, const Square &r){
 
 	return out;
 }
+
+void Square::print(){
+	std::cout << *this;
+}
+

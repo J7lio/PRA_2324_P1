@@ -18,6 +18,8 @@ class Square : public Rectangle{
 		void set_vertices(Point2D* vertices) override;
 
 		friend std::ostream& operator<<(std::ostream &out, const Square &square);
+		
+		void print() override;
 };
 
 #endif
