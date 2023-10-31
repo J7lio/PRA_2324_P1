@@ -21,6 +21,8 @@ Rectangle::Rectangle(){
 }
 
 Rectangle::Rectangle(std::string color, Point2D* vertices){
+	if(!check(vertices)) throw std::invalid_argument("No forma un rectangulo");
+
 	vs = new Point2D[N_VERTICES]{
 		vertices[0],
 		vertices[1],

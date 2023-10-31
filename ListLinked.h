@@ -30,7 +30,8 @@ class ListLinked : public List<T> {
 			}else{
 				Node<T>* aux = new Node<T>(e);
 				aux->next = getNode(pos);
-				getNode(pos-1)->next = aux;			}
+				getNode(pos-1)->next = aux;
+			}
 			n++;
 		}
 
@@ -47,7 +48,7 @@ class ListLinked : public List<T> {
 
 			Node<T>* NodoaBorrar = getNode(pos);
 			if(pos==0){
-                first = NodoaBorrar->next;
+				first = NodoaBorrar->next;
 			}else{
 			    Node<T>* prev = getNode(pos-1);
 			    prev->next = NodoaBorrar->next;
@@ -120,6 +121,5 @@ class ListLinked : public List<T> {
 			out << "]";
 			return out;
 		}
-
 
 };
